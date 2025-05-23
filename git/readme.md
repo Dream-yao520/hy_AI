@@ -13,5 +13,8 @@
 github,gitee 身份
  -git config --global user.name "Dream-yao520 "
  -git config --global user.email "3387210184@qq.com"
-
+ -git status
+ -git add .
+ -git commit -m "first commit"
+ -git push origin main
  - new.txt
