@@ -29,3 +29,5 @@ from modelescope.utils.constant import Tasks
 semantic_cls = pipeline(Tasks.text_classification,'damo/nlp_structbert_sentiment-classification_chinese-base')
 打分 label分类
 result = semantic_cls(input='遥遥领先，遥遥领先，遥遥领先')
+
+//
