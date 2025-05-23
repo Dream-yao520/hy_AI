@@ -43,6 +43,4 @@
         absolute 找到离他最近的（管着它的）position 不为static 的属性定位
         直到body为止
         .container absolute body
-
-        
   
