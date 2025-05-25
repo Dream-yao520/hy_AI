@@ -7,7 +7,7 @@
 
 
 ## repo
-   - 仓库
+   -仓库
    -create a repo  
 # git 配置
 github,gitee 身份
@@ -17,4 +17,4 @@ github,gitee 身份
  -git add .
  -git commit -m "first commit"
  -git push origin main
- - new.txt
+ -new.txt
