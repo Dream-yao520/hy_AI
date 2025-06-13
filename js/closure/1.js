@@ -24,4 +24,4 @@ function curry(fn) {
 }
 let addCurried = curry(add)
 //逐步的去获取函数需要的参数，当到达fn需要的参数个数时，执行fn。
-console.log(addCurried(1)(2)(3))
+console.log(addCurried(1, 2)(3))
