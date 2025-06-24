@@ -11,3 +11,14 @@
 ## 手写call
 - call是属于所有函数的， Function 原型链上的方法
     gretting.call()
+
+## 包含的技能点
+- 原型 Function
+- 函数参数的理解
+    - context,rest运算符
+- context 为空，null,undefine -> window
+- 在context 上挂载方法，轻松实现函数内部的 this 指向 context
+    js 动态性 不过污染了context
+    es6 symbol 唯一值，不会覆盖原有对象（context）的属性
+    delete context上的方法
+- return 返回值
