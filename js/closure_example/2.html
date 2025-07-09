@@ -1,0 +1,26 @@
+<script>
+    function debounce(func, await) {
+        console.log(this);//指向window
+        return function (args) {
+            // 定时器会返回一个id
+            // func 自由变量
+            // func 对象
+            let context = this
+            clearTimeout(func.id)
+            func.id = setTimeout(function () {
+                // this 丢失问题
+                func.call(context, args)
+            }, await)
+        }
+    }
+
+    let obj = {
+        count: 0,
+        inc: debounce(function (val) {
+            // this
+            console.log(this)
+            this.count += val
+        }, 500)
+    }
+    obj.inc(2)
+</script>
