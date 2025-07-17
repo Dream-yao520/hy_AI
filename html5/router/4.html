@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>history SPA</title>
+</head>
+
+<body>
+    <h2>SPA路由模拟</h2>
+    <button onclick="navigate('/home')">首页</button>
+    <button onclick="navigate('/about')">关于</button>
+    <button onclick="navigate('/contact')">联系</button>
+    <button onclick="navigate('/login')">登录</button>
+    <button onclick="replace('/pay')">支付</button>
+    <a href="https://www.zhihu.com/">知乎</a>
+    <div id="view">当前视图</div>
+    <script>
+        function navigate(path) {
+            // 新的url 含义 新的路由状态，持有数据状态 state
+            // 入 history栈,不更新
+            history.pushState({ path }, '', path);
+            renderView(path);
+        }
+        function replace(path) {
+            history.replaceState({ path }, '', path);
+            renderView(path);
+        }
+        function renderView(path) {
+            document.getElementById('view').textContent = `当前视图:${path}`;
+        }
+        // 监听浏览器前进后退事件
+        window.addEventListener('popstate', function (e) {
+            console.log('pop state fired:', e.state);
+            renderView(e.state?.path || location.pathname);
+        })
+    </script>
+</body>
+
+</html>
