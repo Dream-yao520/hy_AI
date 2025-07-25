@@ -31,7 +31,7 @@ const MainLayout = () => {
     const [active, setActive] = useState(0);
     const location = useLocation();
     useEffect(() => {
-        console.log(location.pathname);
+        // console.log(location.pathname);
         // es6的使用power 
         const index = tabs.findIndex((tab) => location.pathname.startsWith(tab.path));
         if (index !== -1) {
@@ -40,8 +40,13 @@ const MainLayout = () => {
     }, [location.pathname]);
     const navigate = useNavigate();
     return (
-        <>
-            <Outlet />
+        <div
+            className='flex flex-col h-screen'
+            style={{ paddingBottom: '50px' }}
+        >
+            <div className='flex-1'>
+                <Outlet />
+            </div>
             {/* tabbar */}
             <Tabbar value={active} onChange={
                 (key) => { setActive(key); navigate(tabs[key].path); }
@@ -55,7 +60,7 @@ const MainLayout = () => {
                     </Tabbar.Item>
                 ))}
             </Tabbar>
-        </>
+        </div>
     )
 }
 
