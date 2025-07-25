@@ -51,3 +51,19 @@ export const kimiChat = async (message) => {
     )
     return res
 }
+
+export const generateAvatar = async (text) => {
+    // 设计一个头像的prompt
+    const prompt = `
+    你是一个漫画设计师，需要为用户设计头像，主打海绵宝宝风格。
+    用户的信息：${text}
+    要求有个性，有设计感，可以抽象一点，可以根据用户的签名来判断生成的头像的风格。
+    `
+    const res = await kimiChat([
+        {
+            role: 'user',
+            content: prompt
+        }
+    ])
+    return res.data.content
+}

@@ -126,6 +126,8 @@ README.MD 很重要 方便面试官 快速了解项目
     - 对各家模型比较感兴趣，升级为kimChat,doubaoChat... 灵活
         性能、能力、性价比
         随意切换大模型，通过参数抽象
+    - 文生图
+        - 优化prompt 设计，
 - 原子css
     - App.css 里面添加了通用样式
     - 各自模块里modeule.css 不影响组件
