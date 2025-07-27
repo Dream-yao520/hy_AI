@@ -1,9 +1,104 @@
-const Search = () => {
-    return (
-        <>
-            <h1>Search</h1>
-        </>
-    )
-}
+import { useState } from 'react'
+import { Search, Tabs, Tag, Space, Divider, Button } from 'react-vant';
+import { ClockO, DeleteO, ArrowLeft } from '@react-vant/icons';
+import { useNavigate } from 'react-router-dom'
 
-export default Search
+const SearchPage = () => {
+    const [searchValue, setSearchValue] = useState('');
+    const [activeTab, setActiveTab] = useState('all');
+    const [isSearching, setIsSearching] = useState(false);
+    const navigate = useNavigate();
+    const [history, setHistory] = useState([
+        'Dream耀', '我想知道中国有哪些好的景点', '江西美食',
+        '景德镇旅游攻略'
+    ]);
+    const handleSearch = (val) => {
+        setIsSearching(true);
+        // console.log('搜索:', val);
+        if (val && !history.includes(val)) {
+            setHistory([val, ...history]);
+        }
+        setSearchValue('');
+        setTimeout(() => {
+            setIsSearching(false);
+        }, 1000);
+    };
+    const handleBack = () => {
+        navigate('/');
+    };
+    const clearHistory = () => {
+        setHistory([]);
+    };
+
+    const deleteHistoryItem = (index) => {
+        const newHistory = [...history];
+        newHistory.splice(index, 1);
+        setHistory(newHistory);
+    };
+    return (
+        <div style={{ padding: '16px' }}>
+            {/* 搜索栏 */}
+            <Search
+                leftIcon={<ArrowLeft onClick={handleBack} />}
+                value={searchValue}
+                onChange={setSearchValue}
+                placeholder="请输入搜索关键词"
+                onSearch={handleSearch}
+                onCancel={() => setSearchValue('')}
+                action={
+                    <Button
+                        disabled={isSearching}
+                        type="primary"
+                        size="small"
+                        style={{ marginLeft: '8px' }}
+                        onClick={() => handleSearch(searchValue)}
+                    >
+                        搜索
+                    </Button>
+                }
+            />
+
+            {/* 分类标签 */}
+            <div style={{ margin: '16px 0' }}>
+                <Tabs active={activeTab} onChange={setActiveTab}>
+                    <Tabs.TabPane title="综合" name="all" />
+                    <Tabs.TabPane title="文章" name="article" />
+                    <Tabs.TabPane title="图片" name="image" />
+                    <Tabs.TabPane title="标签" name="tag" />
+                    <Tabs.TabPane title="用户" name="user" />
+                </Tabs>
+            </div>
+
+            {/* 搜索历史 */}
+            <div style={{ marginTop: '24px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <span style={{ fontSize: '16px', fontWeight: '500' }}>搜索历史</span>
+                    <DeleteO fontSize="16px" onClick={clearHistory} />
+                </div>
+
+                <Space wrap>
+                    {history.map((item, index) => (
+                        <Tag
+                            key={index}
+                            round
+                            type="primary"
+                            plain
+                            size="medium"
+                            onClose={() => deleteHistoryItem(index)}
+                            closeable
+                        >
+                            <Space>
+                                <ClockO fontSize="14px" />
+                                {item}
+                            </Space>
+                        </Tag>
+                    ))}
+                </Space>
+            </div>
+
+            <Divider>字节算法</Divider>
+        </div>
+    );
+};
+
+export default SearchPage

@@ -8,7 +8,9 @@ import {
     CellGroup,
     ActionSheet,
     Popup,
-    Loading
+    Loading,
+    Grid,
+    GridItem,
 } from 'react-vant';
 import {
     ServiceO,
@@ -16,6 +18,9 @@ import {
     StarO,
     SettingO,
     UserCircleO,
+    CommentO,
+    GuideO,
+    ThumbCircleO,
 } from '@react-vant/icons';
 import styles from './account.module.css'
 import { generateAvatar } from '@/llm';
@@ -50,6 +55,12 @@ const Account = () => {
     const actions = [
         { name: 'AI生成头像', color: '#123123', type: 1 },
         { name: '上传头像', color: '#ee0a24', type: 2 },
+    ]
+    const features = [
+        { icon: CommentO, name: '课程中心' },
+        { icon: GuideO, name: '出行方式' },
+        { icon: FriendsO, name: '我的圈子' },
+        { icon: ThumbCircleO, name: '推荐美食' },
     ]
     return (
         <div className={styles.container}>
@@ -88,7 +99,19 @@ const Account = () => {
                 onCancel={() => setShowActionSheet(false)}
                 onSelect={(e) => handleAction(e)}
             />
+            <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px' }}>常用功能</div>
+            <Grid border={false} columnNum={4}>
+                {features.map((item, index) => (
+                    <GridItem
+                        key={index}
+                        icon={<item.icon size="24px" />}
+                        text={item.name}
+                        onClick={() => console.log(`点击了${item.name}`)}
+                    />
+                ))}
+            </Grid>
         </div>
+
     )
 }
 
