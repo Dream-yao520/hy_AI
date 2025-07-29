@@ -11,6 +11,7 @@ import {
     Loading,
     Grid,
     GridItem,
+    Card,
 } from 'react-vant';
 import {
     ServiceO,
@@ -21,11 +22,30 @@ import {
     CommentO,
     GuideO,
     ThumbCircleO,
+    AddO,
+    CartO,
+    ChatO,
+    FireO,
+    LikeO,
+    Search,
+    HomeO,
+    UserO,
 } from '@react-vant/icons';
 import styles from './account.module.css'
 import { generateAvatar } from '@/llm';
 
 const Account = () => {
+    const gridData = [
+        { icon: AddO, text: '添加' },
+        { icon: CartO, text: '购物车' },
+        { icon: ChatO, text: '聊天' },
+        { icon: FireO, text: '热门' },
+        { icon: LikeO, text: '喜欢' },
+        { icon: StarO, text: '收藏' },
+        { icon: Search, text: '搜索' },
+        { icon: HomeO, text: '首页' },
+        { icon: UserO, text: '我的' }
+    ];
     const [userInfo, setUserInfo] = useState({
         nickname: '海绵宝宝',
         level: '100级',
@@ -35,7 +55,7 @@ const Account = () => {
     useTitle('我的')
     const [showActionSheet, setShowActionSheet] = useState(false);
     const handleAction = async (e) => {
-        console.log(e)
+        // console.log(e)
         if (e.type === 1) {
             // AI生成头像
             const text = `昵称${userInfo.nickname}签名${userInfo.slogan}`
@@ -80,17 +100,22 @@ const Account = () => {
                 </div>
             </div>
             <div>
-                <CellGroup inset className='mt3'>
-                    <Cell title="服务" icon={<ServiceO />} isLink />
-                </CellGroup>
-                <CellGroup inset className='mt2'>
-                    <Cell title="收藏" icon={<StarO />} isLink />
-                    <Cell title="朋友圈" icon={<FriendsO />} isLink />
-                </CellGroup>
-
-                <CellGroup inset className='mt2'>
-                    <Cell title="设置" icon={<SettingO />} isLink />
-                </CellGroup>
+                <Card className='mt3' style={{ borderRadius: '8px', overflow: 'hidden' }}>
+                    <CellGroup bordered={false}>
+                        <Cell title="服务" icon={<ServiceO />} isLink />
+                    </CellGroup>
+                </Card>
+                <Card className='mt2' style={{ borderRadius: '8px', overflow: 'hidden' }}>
+                    <CellGroup bordered={false}>
+                        <Cell title="收藏" icon={<StarO />} isLink />
+                        <Cell title="朋友圈" icon={<FriendsO />} isLink />
+                    </CellGroup>
+                </Card>
+                <Card className='mt2' style={{ borderRadius: '8px', overflow: 'hidden' }}>
+                    <CellGroup bordered={false}>
+                        <Cell title="设置" icon={<SettingO />} isLink />
+                    </CellGroup>
+                </Card>
             </div>
             <ActionSheet
                 visible={showActionSheet}
@@ -110,6 +135,18 @@ const Account = () => {
                     />
                 ))}
             </Grid>
+            <div className={styles.gridContainer}>
+                {
+                    gridData.map((item, index) => (
+                        <div key={index} className={styles.gridItem}>
+                            <div className={styles.gridIcon}>
+                                <item.icon size="24px" />
+                            </div>
+                            <div className={styles.text}>{item.text}</div>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
 
     )

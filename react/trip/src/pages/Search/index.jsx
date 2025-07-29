@@ -1,30 +1,85 @@
-import { useState } from 'react'
-import { Search, Tabs, Tag, Space, Divider, Button } from 'react-vant';
-import { ClockO, DeleteO, ArrowLeft } from '@react-vant/icons';
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect, memo } from 'react'
+import { Tabs, Tag, Space, Divider } from 'react-vant';
+import { ClockO, DeleteO, } from '@react-vant/icons';
+import SearchBox from '@/components/SearchBox'
+import { useSearchStore } from '@/store/useSearchStore';
+import styles from './search.module.css'
+
+const HotListItems = memo((props) => {
+    console.log('HotListItems', props);
+    const { hotList } = props;
+    return (
+        <div className={styles.hot}>
+            <h1>热门推荐</h1>
+            {
+                hotList.map(item => (
+                    <div className={styles.item} key={item.id}>
+                        {item.city}
+                    </div>
+                ))
+            }
+        </div>
+    )
+})
 
 const SearchPage = () => {
+    const [query, setQuery] = useState('');
+    const { searchHistory, suggestList, setSuggestList, hotList, setHotList } = useSearchStore();
+    // 单向数据流
+    // 反复生成 useCallback
+    // const handleQuery = (val) => {
+    //     // api 请求
+    //     setSearchValue(val);
+    // }
+    useEffect(() => {
+        setHotList();
+    }, [])
     const [searchValue, setSearchValue] = useState('');
     const [activeTab, setActiveTab] = useState('all');
     const [isSearching, setIsSearching] = useState(false);
-    const navigate = useNavigate();
-    const [history, setHistory] = useState([
-        'Dream耀', '我想知道中国有哪些好的景点', '江西美食',
-        '景德镇旅游攻略'
-    ]);
+    const handleQuery = (query) => {
+        //api 请求
+        console.log('debounce之后', query)
+        setQuery(query);
+        if (!query) {
+            return
+        }
+        setSuggestList(query);
+    }
+    // 添加最大历史记录数量常量
+    const MAX_HISTORY_LENGTH = 20;
+    // 添加历史记录点击事件处理函数
+    const handleHistoryClick = (item) => {
+        setSearchValue(item);
+    };
+    const suggestListStyle = {
+        display: query === '' ? 'none' : 'block',
+    }
+    const [history, setHistory] = useState([]);
     const handleSearch = (val) => {
         setIsSearching(true);
-        // console.log('搜索:', val);
-        if (val && !history.includes(val)) {
-            setHistory([val, ...history]);
+        if (val) {
+            // LRU缓存逻辑实现
+            const newHistory = [...history];
+            const index = newHistory.indexOf(val);
+
+            // 如果已存在则移除原位置
+            if (index !== -1) {
+                newHistory.splice(index, 1);
+            }
+            // 如果达到最大长度则移除最后一项
+            else if (newHistory.length >= MAX_HISTORY_LENGTH) {
+                newHistory.pop();
+            }
+
+            // 添加到开头（最近使用）
+            newHistory.unshift(val);
+            setHistory(newHistory);
         }
         setSearchValue('');
         setTimeout(() => {
             setIsSearching(false);
         }, 1000);
-    };
-    const handleBack = () => {
-        navigate('/');
     };
     const clearHistory = () => {
         setHistory([]);
@@ -36,9 +91,21 @@ const SearchPage = () => {
         setHistory(newHistory);
     };
     return (
-        <div style={{ padding: '16px' }}>
+        <div style={{ padding: '16px' }} className='container'>
             {/* 搜索栏 */}
-            <Search
+            <div className={styles.wrapper}>
+                <SearchBox handleQuery={handleQuery} />
+                {/* 维护性 */}
+                <HotListItems hotList={hotList} />
+            </div>
+            <div className={styles.list} style={suggestListStyle}>
+                {suggestList.map(item => (
+                    <div key={item} className={styles.item}>
+                        {item}
+                    </div>
+                ))}
+            </div>
+            {/* <Search
                 leftIcon={<ArrowLeft onClick={handleBack} />}
                 value={searchValue}
                 onChange={setSearchValue}
@@ -56,7 +123,7 @@ const SearchPage = () => {
                         搜索
                     </Button>
                 }
-            />
+            /> */}
 
             {/* 分类标签 */}
             <div style={{ margin: '16px 0' }}>
@@ -86,6 +153,10 @@ const SearchPage = () => {
                             size="medium"
                             onClose={() => deleteHistoryItem(index)}
                             closeable
+                            // 添加点击事件
+                            onClick={() => handleHistoryClick(item)}
+                            // 添加鼠标悬停样式
+                            style={{ cursor: 'pointer' }}
                         >
                             <Space>
                                 <ClockO fontSize="14px" />

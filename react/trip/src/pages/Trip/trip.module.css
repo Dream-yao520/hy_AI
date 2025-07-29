@@ -1,6 +1,7 @@
 .chatArea {
     overflow-y: auto;
     padding: 12px;
+    padding-bottom: 100px;
     background-color: #f7f8fa;
 }
 
@@ -8,6 +9,10 @@
     padding: 16px;
     border-top: 1px solid #ddd;
     background: white;
+    position: sticky;
+    bottom: 100px;
+    /* 为底部Tabbar留出空间 */
+    z-index: 10;
 }
 
 .input {
