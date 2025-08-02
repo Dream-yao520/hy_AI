@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
-import { Button, Input, Loading, Toast } from 'react-vant'
+import { useState, useRef } from 'react';
+import { Button, Input, Toast } from 'react-vant'
 import { ChatO, UserO } from '@react-vant/icons';
 import useTitle from '@/hooks/useTitle'
 import { chat } from '@/llm'
@@ -102,7 +102,7 @@ const Trip = () => {
                 />
                 <Button disabled={isSending} type="primary" onClick={handleChat} >发送</Button>
             </div>
-            {isSending && (<div className="fixed-loading"><Loading type="ball" /></div>)}        
+            {/* {isSending && (<div className="fixed-loading"><Loading type="ball" /></div>)}         */}
         </div>
     );
 };

@@ -1,28 +1,10 @@
-import { useEffect, memo } from 'react'
+import { useEffect } from 'react'
 import { Tag, Space } from 'react-vant';
 import { ClockO, DeleteO, } from '@react-vant/icons';
 import SearchBox from '@/components/SearchBox'
 import { useSearchStore } from '@/store/useSearchStore';
 import styles from './search.module.css'
-
-const HotListItems = memo((props) => {
-    const { hotList, onItemClick } = props;
-    return (
-        <div className={styles.hot}>
-            <h1>热门鞋子推荐</h1>
-            {hotList.map((item, index) => (
-                <div
-                    className={styles.item}
-                    key={item.id}
-                    onClick={() => onItemClick(item.name)}
-                >
-                    <span className={styles.rank}>{index + 1}.</span>
-                    {item.name}
-                </div>
-            ))}
-        </div>
-    )
-})
+import HotListItems from '@/components/HotListItems';
 
 const SearchPage = () => {
     const {
@@ -67,7 +49,7 @@ const SearchPage = () => {
     }
 
     return (
-        <div className={styles.container}>  {/* 修改：移除内联样式，使用CSS类 */}
+        <div className={styles.container}>
             {/* 搜索栏 */}
             <div className={styles.searchWrapper}>
                 <SearchBox

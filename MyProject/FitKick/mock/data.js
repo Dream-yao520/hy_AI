@@ -5,7 +5,7 @@ const getImages = (page, pageSize = 10) => {
     return Array.from({ length: pageSize }, (_, i) => ({
         // 用于索引唯一
         id: `${page}-${i}`,
-        height: Mock.Random.integer(400, 600),
+        height: Mock.Random.integer(100, 1000),
         url: Mock.Random.image('300x400', Mock.Random.color(), '#fff', 'img')
     }))
 }
@@ -74,6 +74,10 @@ export default [{
             {
                 id: '109',
                 name: "Travis Scott x Nike Air Max 1 \"Baroque Brown\""
+            },
+            {
+                id: '110',
+                name: "Jacquemus x Nike Air Humara"
             },
             ]
         }

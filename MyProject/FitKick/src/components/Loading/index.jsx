@@ -1,9 +1,13 @@
+import styles from './loading.module.css'
+import { memo } from 'react'
+
 const Loading = () => {
     return (
-        <div>
-            <h1>Loading...</h1>
+        <div className={styles.wrapper}>
+            <div></div>
+            <div></div>
         </div>
     )
 }
 
-export default Loading
+export default memo(Loading);

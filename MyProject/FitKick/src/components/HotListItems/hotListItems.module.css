@@ -1,0 +1,45 @@
+.hot {
+    margin-top: 24px;
+    background: linear-gradient(to bottom, #ffd1dc, #f2f3f4);
+    /* 橙红色到背景色的渐变 */
+    padding: 16px;
+    /* 添加内边距 */
+    border-radius: 8px;
+    /* 可选：添加圆角 */
+}
+
+.hot h1 {
+    font-size: 36px;
+    /* 调整标题大小 */
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #fff;
+    /* 标题文字设为白色，与橙红色背景对比 */
+    padding-left: 8px;
+    /* 左侧内边距 */
+}
+
+.hot .item {
+    padding: 12px 8px;
+    /* 调整内边距 */
+    display: flex;
+    /* 使用flex布局 */
+    align-items: center;
+    /* 垂直居中 */
+}
+
+.rank {
+    display: inline-block;
+    width: 40px;
+    /* 固定宽度，确保序号对齐 */
+    font-weight: bold;
+    color: #ff4d4f;
+    /* 序号颜色 */
+    margin-right: 10px;
+}
+
+.hot h2 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
