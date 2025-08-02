@@ -48,7 +48,7 @@
       react-vant(UI组件库) @react-vant/icons lib-flexible(移动端适配)  mockjs
       react-markdown
      开发期间的依赖
-     vite-plugin-mock jwt postcss-pxtorem
+     vite-plugin-mock jwt postcss-pxtorem jsonwebtoken
 - vite 配置
     - alias
     - mock

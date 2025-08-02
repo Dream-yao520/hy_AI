@@ -3,7 +3,12 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:5173/api'
 
 axios.interceptors.request.use((config) => {
-    // token
+    const token = localStorage.getItem('token') || ""
+    // if (token) {
+    // console.log('/////');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
     return config
 })
 // 响应拦截

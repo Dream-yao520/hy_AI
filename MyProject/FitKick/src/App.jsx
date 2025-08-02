@@ -20,6 +20,7 @@ const Search = lazy(() => import('@/pages/Search'))
 const ProductDetail = lazy(() => import('@/pages/ProductDetail'))
 const Login = lazy(() => import('@/pages/Login'))
 const Chat = lazy(() => import('@/pages/Chat'))
+const RequireAuth = lazy(() => import('@/components/RequireAuth'))
 
 function App() {
 
@@ -31,8 +32,8 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/user" element={<UserProfile />} />
           <Route path="/product" element={<ProductList />} />
-          <Route path="/like" element={<Like />} />
-          <Route path="/chat" element={<Chat />} />
+          <Route path="/like" element={<RequireAuth><Like /></RequireAuth>} />
+          <Route path="/chat" element={<RequireAuth><Chat /></RequireAuth>} />
         </Route>
         {/* 空的Layout */}
         <Route path="/" element={<BlankLayout />}>
