@@ -2,31 +2,43 @@ import { useRef } from 'react';
 import { useLoginStore } from '@/store/useLoginStore';
 import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
+import { useToastStore } from '@/store/useToastStore'
 
 const Login = () => {
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
-    const { login } = useLoginStore();
+    const { login, user } = useLoginStore();
     const navigate = useNavigate();
-
+    const { showToast } = useToastStore();
     const handleSubmit = (e) => {
         e.preventDefault();
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
 
         if (!username || !password) {
-            alert('请输入用户名和密码');
+            showToast({
+                message: '请输入用户名和密码',
+                type: 'warning'
+            });
             return;
         }
 
         login({ username, password })
             .then(() => {
+                const nickname = user?.nickname || '海绵宝宝';
+                showToast({
+                    message: `欢迎你, ${nickname}`,
+                    type: 'success'
+                });
                 setTimeout(() => {
                     navigate(-1);
                 }, 1000);
             })
             .catch(err => {
-                alert(err.message || '登录失败');
+                showToast({
+                    message: err.message || '登录失败',
+                    type: 'error'
+                });
             });
     };
 

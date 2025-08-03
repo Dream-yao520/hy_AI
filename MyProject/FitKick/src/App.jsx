@@ -8,6 +8,7 @@ import {
   Navigate
 } from 'react-router-dom'
 import './App.css'
+import Toast from '@/components/Toast'
 
 const Loading = lazy(() => import('@/components/Loading'))
 const MainLayout = lazy(() => import('@/components/MainLayout'))
@@ -32,16 +33,17 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/user" element={<UserProfile />} />
           <Route path="/product" element={<ProductList />} />
-          <Route path="/like" element={<Like />} /> //requireAuth
-          <Route path="/chat" element={<Chat />} />//requireAuth
+          <Route path="/like" element={<RequireAuth><Like /></RequireAuth>} /> //requireAuth
+          <Route path="/chat" element={<RequireAuth><Chat /></RequireAuth>} />//requireAuth
         </Route>
         {/* 空的Layout */}
         <Route path="/" element={<BlankLayout />}>
           <Route path="/search" element={<Search />} />
-          <Route path="/detail/:id" element={<ProductDetail />} />
+          <Route path="/detail/:id" element={<RequireAuth><ProductDetail /></RequireAuth>} />//requireAuth
           <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
+      <Toast />
     </Suspense>
   )
 }

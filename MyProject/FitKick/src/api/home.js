@@ -1,7 +1,7 @@
 import axios from './config'
 
 // 导入环境变量中的Unsplash API Key
-const UNSPLASH_API_KEY = import.meta.env.VITE_IMAGE_API_KEY
+const UNSPLASH_API_KEY = import.meta.env.VITE_UNSPLASH_API_KEY
 
 export const getImages = (page, tab) => {
     // 首先尝试调用Unsplash API

@@ -5,8 +5,10 @@ import SearchBox from '@/components/SearchBox'
 import { useSearchStore } from '@/store/useSearchStore';
 import styles from './search.module.css'
 import HotListItems from '@/components/HotListItems';
+import useTitle from '@/hooks/useTitle';
 
 const SearchPage = () => {
+    useTitle('搜索');
     const {
         query,
         searchHistory,

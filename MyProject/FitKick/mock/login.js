@@ -25,6 +25,7 @@ export default [
                 user: {
                     id: "001",
                     username: "admin",
+                    nickname: "海绵宝宝"  // 添加nickname字段
                 }
             }, secret, {
                 expiresIn: '24h',
@@ -33,10 +34,12 @@ export default [
 
             // 生成token 颁发令牌
             return {
+                code: 0,
                 token,
                 data: {
                     id: "001",
                     username: "admin",
+                    nickname: "海绵宝宝"  // 添加nickname字段
                 }
             }
         },
@@ -47,10 +50,10 @@ export default [
         response: (req, res) => {
             // 用户端 token headers
             const token = req.headers["authorization"].split(' ')[1]
-            console.log(token)
+            // console.log(token)
             try {
                 const decode = jwt.decode(token, secret)
-                console.log(decode)
+                // console.log(decode)
                 return {
                     code: 0,
                     data: decode.user

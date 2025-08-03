@@ -137,6 +137,8 @@
         受控或者非受控组件
 - 路由守卫
 - api/
+- Toast轻提示
+    通用组件，在哪里想用就可以在哪里引入去使用，根据状态的不同显示不同的内容
 ## 项目亮点和难点
 - 前端智能
     - chat 函数
@@ -155,7 +157,8 @@
         元素的样式就可以由这些原子类组合而成
         样式可以复用的更好，以后几乎可以不用写样式
 - jwt 鉴权
-
+- grid 布局
+    - 在我的组件中使用grid布局显示较多功能块
 ## 项目遇到什么问题，怎么解决的
 - chat messages 遇到message 覆盖问题
 - 闭包陷阱问题
@@ -176,4 +179,5 @@
         两个响应式数组，判断哪一列高度更少，将新得到的img加入那个数组
     - intersectionObserver 用到两次，重复了，dry原则   
         封装成自定义hooks:useIntersectionObserver
-    
+- jwt 鉴权登录
+    - 在请求中带上token，用axios拦截，在Authorization 中带上token
