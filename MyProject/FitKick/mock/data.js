@@ -1,10 +1,10 @@
 import Mock from 'mockjs';
 
 // 每页10
-const getImages = (page, pageSize = 10) => {
+const getImages = (tab = '推荐', page, pageSize = 10) => {
     return Array.from({ length: pageSize }, (_, i) => ({
         // 用于索引唯一
-        id: `${page}-${i}`,
+        id: `${tab}-${page}-${Date.now()}-${i}`,
         height: Mock.Random.integer(100, 1000),
         url: Mock.Random.image('300x400', Mock.Random.color(), '#fff', 'img')
     }))
@@ -120,9 +120,10 @@ export default [{
     method: 'get',
     response: ({ query }) => {
         const page = Number(query.page) || 1;
+        const tab = query.tab || '推荐';
         return {
             code: 0,
-            data: getImages(page)
+            data: getImages(tab, page)
         }
     }
 }

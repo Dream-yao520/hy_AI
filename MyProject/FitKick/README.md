@@ -121,6 +121,22 @@
     组件卸载时，直接使用observer.disconnect() 释放资源，防止内存泄漏
     - key id 下拉刷新
     - 使用IntersectionObserver 再次去执行图片懒加载  data-src
+
+- login 模块
+    - jwt 鉴权
+    sign 颁发一个token user对象,secret 加密字符串
+    decode  解码token,secret 加密字符串 
+    - 加盐
+    secret
+    传递token的时候前面会加上 Bearer ${token} 持有者
+    通过 http headers Authorization
+- 前端的用户权限状态 流程
+- zustand
+        登录、user useUserStore
+- 登录页面
+        受控或者非受控组件
+- 路由守卫
+- api/
 ## 项目亮点和难点
 - 前端智能
     - chat 函数
@@ -138,7 +154,7 @@
         一个元素按功能逻辑拆分成多个类，和原子一样
         元素的样式就可以由这些原子类组合而成
         样式可以复用的更好，以后几乎可以不用写样式
-
+- jwt 鉴权
 
 ## 项目遇到什么问题，怎么解决的
 - chat messages 遇到message 覆盖问题

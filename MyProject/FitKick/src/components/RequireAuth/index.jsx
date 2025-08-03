@@ -1,10 +1,10 @@
-import { useUserStore } from '@/store/useUserStore'
+import { useLoginStore } from '@/store/useLoginStore'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
 const RequireAuth = ({ children }) => {
 
-    const { isLogin } = useUserStore()
+    const { isLogin } = useLoginStore()
     const navigate = useNavigate()
     const { pathname } = useLocation()
     useEffect(() => {

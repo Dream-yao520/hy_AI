@@ -70,14 +70,14 @@ const SearchPage = () => {
                         </div>
 
                         <Space wrap>
-                            {searchHistory.map((item, index) => (
+                            {searchHistory.map((item) => (
                                 <Tag
-                                    key={index}
+                                    key={item}
                                     round
                                     type="primary"
                                     plain
                                     size="medium"
-                                    onClose={() => deleteHistoryItem(index)}
+                                    onClose={() => deleteHistoryItem(searchHistory.indexOf(item))}
                                     closeable
                                     onClick={() => enhancedHandleHistoryClick(item)}
                                     style={{ cursor: 'pointer' }}

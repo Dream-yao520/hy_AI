@@ -1,12 +1,12 @@
 import { useRef } from 'react';
-import { useUserStore } from '@/store/useUserStore';
+import { useLoginStore } from '@/store/useLoginStore';
 import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 
 const Login = () => {
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
-    const { login } = useUserStore();
+    const { login } = useLoginStore();
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
@@ -22,7 +22,7 @@ const Login = () => {
         login({ username, password })
             .then(() => {
                 setTimeout(() => {
-                    navigate('/');
+                    navigate(-1);
                 }, 1000);
             })
             .catch(err => {

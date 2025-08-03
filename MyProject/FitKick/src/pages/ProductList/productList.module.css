@@ -1,0 +1,29 @@
+/* 固定搜索框容器在页面顶部 */
+.searchContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    /* 根据你的设计调整背景色 */
+    z-index: 1000;
+    /* 确保在其他内容之上 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* 添加阴影增加层次感 */
+}
+
+/* 为瀑布流内容添加上边距，避免被搜索框遮挡 */
+.waterfallContainer {
+    margin-top: 168px;
+}
+
+.tabsContainer {
+    position: fixed;
+    top: 80px;
+    /* 根据搜索框高度调整 */
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}

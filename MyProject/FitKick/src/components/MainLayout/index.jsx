@@ -6,26 +6,21 @@ import {
     Tabbar,
 } from 'react-vant';
 import {
-    HomeO,
-    BagO,
-    LikeO,
-    UserO,
-    ChatO
-} from '@react-vant/icons';
-import {
     Outlet,
     useNavigate,
     useLocation
 } from 'react-router-dom'
 
 //菜单栏配置
-const tabs = [
-    { icon: <HomeO />, title: '首页', path: '/home' },
-    { icon: <BagO />, title: '商品', path: '/product' },
-    { icon: <LikeO />, title: '喜欢', path: '/like' },
-    { icon: <ChatO />, title: '智能助手', path: '/chat' },
-    { icon: <UserO />, title: '我的', path: '/user' },
+// 提取重复的样式为常量
+const IconStyle = { width: '22px', height: '22px' };
 
+const tabs = [
+    { icon: <svg style={IconStyle}><use xlinkHref="#icon-shouye"></use></svg>, title: '首页', path: '/home' },
+    { icon: <svg style={IconStyle}><use xlinkHref="#icon-shangpin"></use></svg>, title: '商品', path: '/product' },
+    { icon: <svg style={IconStyle}><use xlinkHref="#icon-xihuan"></use></svg>, title: '喜欢', path: '/like' },
+    { icon: <svg style={IconStyle}><use xlinkHref="#icon-activeStatenamexuanzhong-2"></use></svg>, title: '智能助手', path: '/chat' },
+    { icon: <svg style={IconStyle}><use xlinkHref="#icon-wode1"></use></svg>, title: '我的', path: '/user' },
 ]
 
 const MainLayout = () => {

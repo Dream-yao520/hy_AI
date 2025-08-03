@@ -1,7 +1,7 @@
 .hot {
     margin-top: 24px;
-    background: linear-gradient(to bottom, #ffd1dc, #f2f3f4);
-    /* 橙红色到背景色的渐变 */
+    background: linear-gradient(to bottom, #ffd1dc, 10%, #f2f3f4);
+    /* 淡粉红色到背景色的渐变 */
     padding: 16px;
     /* 添加内边距 */
     border-radius: 8px;
@@ -14,7 +14,7 @@
     font-weight: 600;
     margin-bottom: 12px;
     color: #fff;
-    /* 标题文字设为白色，与橙红色背景对比 */
+    /* 标题文字设为白色，与淡粉色背景对比 */
     padding-left: 8px;
     /* 左侧内边距 */
 }
