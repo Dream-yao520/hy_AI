@@ -1,0 +1,204 @@
+/* 修改.likeContainer类，添加背景颜色 */
+.likeContainer {
+    padding: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin-bottom: 100px;
+    background-color: #f5f7fa;
+    /* 柔和的浅灰色背景 */
+    min-height: 100vh;
+    /* 确保背景色覆盖整个视口高度 */
+}
+
+/* 可选：调整产品卡片样式以适应新背景 */
+.productCard {
+    position: relative;
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    /* 增强阴影效果 */
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    /* 添加过渡效果 */
+}
+
+/* 可选：添加卡片悬停效果 */
+.productCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.filterButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.filterButtons button {
+    padding: 6px 12px;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.filterButtons button.active {
+    background-color: #f0f0f0;
+    border-color: #bbb;
+}
+
+.productList {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.productCard {
+    position: relative;
+    /* 确保按钮可以绝对定位 */
+    display: flex;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* 隐藏超出卡片的按钮部分 */
+}
+
+.unlikeButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 120px;
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.checkboxContainer {
+    margin-right: 12px;
+    align-self: center;
+}
+
+.productImage {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 16px;
+    border-radius: 4px;
+}
+
+.productInfo {
+    flex: 1;
+}
+
+.productName {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.productDetails {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.productPrice {
+    color: #e64340;
+    font-weight: 600;
+}
+
+.currentPrice {
+    color: #e64340;
+    font-weight: 600;
+}
+
+@media (min-width: 768px) {
+    .productList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .productList {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* 添加全选容器样式 */
+.selectAllContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f5f7fa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    width: fit-content
+}
+
+.selectAllContainer input {
+    margin-right: 8px;
+}
+
+
+/* 添加结算按钮固定定位样式 */
+.checkoutButton {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 12px 24px;
+    background-color: #e64340;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(230, 67, 64, 0.3);
+    z-index: 100;
+    transition: all 0.3s ease;
+    margin-bottom: 100px;
+}
+
+.checkoutButton:hover {
+    background-color: #c4322f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(230, 67, 64, 0.4);
+}
+
+.checkoutButton:disabled {
+    background-color: #f5f5f5;
+    color: #d9d9d9;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}

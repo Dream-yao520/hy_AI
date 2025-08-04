@@ -42,6 +42,7 @@
 - api
 - mock
 - utils
+- LLM
 ## 开发前的准备
 - 安装的包
     react-router-dom zustand axios
@@ -159,6 +160,8 @@
 - jwt 鉴权
 - grid 布局
     - 在我的组件中使用grid布局显示较多功能块
+- 使用发布者订阅模式思想
+这个实现使用了发布者-订阅者模式的思想，通过 Zustand 状态管理来实现组件间的通信。当喜欢状态发生变化时，相关组件会收到通知并更新 UI。react-vant 的 Tabbar.Item 组件内置了徽章功能，我们只需要设置 badge 属性即可显示微标提示。
 ## 项目遇到什么问题，怎么解决的
 - chat messages 遇到message 覆盖问题
 - 闭包陷阱问题

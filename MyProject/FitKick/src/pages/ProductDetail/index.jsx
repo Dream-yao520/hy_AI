@@ -1,4 +1,5 @@
 import useDetailStore from '@/store/useDetailStore'
+import { useLikeStore } from '@/store/useLikeStore'  // 导入useLikeStore
 import {
     useParams,
     useLocation,
@@ -17,16 +18,18 @@ import useTitle from '@/hooks/useTitle'
 import styles from './productDetail.module.css'
 import {
     ArrowLeft,
-    Cart,
+    Like,
     ShopO,
     ServiceO,
     StarO,
     Logistics,
-    LikeO,
     Description,
+    Passed
 } from '@react-vant/icons';
+import { useToastStore } from '@/store/useToastStore'
+import { triggerBadgeUpdate } from '@/store/useBadgeStore'; // 导入徽章更新函数
 
-const BottomBar = memo(() => {
+const BottomBar = memo(({ onAddLike, isLiked }) => {  // 接收isLiked属性
     return (
         <div className={styles.bottomBar}>
             <div className={styles.left}>
@@ -44,7 +47,12 @@ const BottomBar = memo(() => {
                 </div>
             </div>
             <div className={styles.right}>
-                <div className={styles.cartBtn}>加入喜欢</div>
+                <div
+                    className={`${styles.cartBtn} ${isLiked ? styles.cancelLikeBtn : ''}`}
+                    onClick={onAddLike}
+                >
+                    {isLiked ? '取消喜欢' : '加入喜欢'}
+                </div>
                 <div className={styles.buyBtn}>立即购买</div>
             </div>
 
@@ -54,6 +62,8 @@ const BottomBar = memo(() => {
 
 const ProductDetail = () => {
     const { detail, loading, setDetail } = useDetailStore()
+    const { addLikeProduct, removeLikeProduct, products } = useLikeStore()
+    const { showToast } = useToastStore();
     const { id } = useParams()
     const navigate = useNavigate();
     const location = useLocation();
@@ -68,18 +78,54 @@ const ProductDetail = () => {
         useTitle(detail?.title || '详情')
     }, [detail])
     // console.log(detail);
+    // 处理加入喜欢/取消喜欢的点击事件
+    const handleAddLike = () => {
+        // 创建商品对象，使用原始ID
+        const productId = detail.id || id;
+        const productToAdd = {
+            id: productId,
+            name: detail.title,
+            price: detail.price,
+            size: Math.floor(Math.random() * (45 - 35 + 1)) + 35 + '码',
+            image: clickedImageUrl || detail.images[0]?.url
+        };
+
+        // 检查商品是否已在喜欢列表中
+        const isLiked = products.some(p => p.id === productId);
+
+        if (isLiked) {
+            // 移除喜欢
+            removeLikeProduct(productId);
+            showToast({
+                message: '商品已从喜欢列表移除',
+                type: 'warning',
+            });
+        } else {
+            // 添加喜欢
+            addLikeProduct(productToAdd);
+            showToast({
+                message: '商品已添加到喜欢列表',
+                type: 'success',
+            });
+            // 触发徽章更新
+            triggerBadgeUpdate();
+        }
+    }
+
+    // 计算商品是否已被喜欢，使用原始ID
+    const productId = detail.id || id;
+    const isLiked = products.some(p => p.id === productId);
+
     if (loading) return <Skeleton />
     return (
         <>
             <nav className={styles.nav}>
                 <ArrowLeft fontSize={36} onClick={() => navigate(-1)} />
-                <Cart fontSize={36} />
+                <Like fontSize={36} color={isLiked ? 'red' : 'black'} onClick={() => navigate('/like')} />
             </nav>
             {/* 幻灯片 */}
             <div className={styles.container}>
                 <Swiper
-                // className={styles.swiper}
-                // pagination={{ clickable: true }}
                 >
                     {
                         detail?.images.map((item, index) => (
@@ -100,7 +146,7 @@ const ProductDetail = () => {
                     <div className={styles.price}>
                         ￥{detail?.price}
                     </div>
-                    <div className={styles.couponBtn}>登录查看更多</div>
+                    <div className={styles.couponBtn}>点击查看更多</div>
                 </div>
                 <div className={styles.titleRow}>
                     <span className={styles.tag}>IFASHION</span>
@@ -116,16 +162,16 @@ const ProductDetail = () => {
                 </div>
 
                 <div className={styles.row}>
-                    <LikeO className={styles.icon} />
+                    <Passed className={styles.icon} />
                     <span>7天无理由退货</span>
                 </div>
                 <div className={styles.row}>
                     <Description className={styles.icon} />
-                    <span>鞋型：厚底波浪底（参考Nike Air Y2K）+ 流线型金属质感骨架</span>
+                    <span>详情：{detail?.desc}</span>
                 </div>
 
             </div>
-            <BottomBar />
+            <BottomBar onAddLike={handleAddLike} isLiked={isLiked} />
         </>
     )
 }

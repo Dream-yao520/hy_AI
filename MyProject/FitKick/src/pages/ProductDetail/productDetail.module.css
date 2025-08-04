@@ -83,7 +83,7 @@
 }
 
 .couponBtn {
-    background-color: #ff5000;
+    background-color: #ff000d;
     color: white;
     font-size: 24px;
     padding: 8px 16px;
@@ -123,6 +123,7 @@
 
 .extraInfo {
     font-size: 22px;
+    margin-left: 56px;
 }
 
 .row {
@@ -137,4 +138,8 @@
     margin-right: 12px;
     font-size: 32px;
     color: #999;
+    width: 40px;
+    /* 添加固定宽度 */
+    flex-shrink: 0;
+    /* 防止在flex布局中被缩小 */
 }

@@ -142,7 +142,7 @@ export default [{
 
         const randomData = Mock.mock({
             title: title,
-            price: '@integer(60, 100)',
+            price: '@integer(100, 300)',
             desc: desc,
             images: [
                 {

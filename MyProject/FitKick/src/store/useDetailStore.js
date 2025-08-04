@@ -17,6 +17,7 @@ const initialImages = [{
 }]
 const useDetailStore = create((set) => ({
     detail: {
+        id: '',
         title: '',
         desc: '',
         price: '',

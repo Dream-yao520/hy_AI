@@ -10,6 +10,7 @@ import {
     useNavigate,
     useLocation
 } from 'react-router-dom'
+import { useBadgeStore } from '@/store/useBadgeStore'; // 导入徽章状态管理
 
 //菜单栏配置
 // 提取重复的样式为常量
@@ -26,6 +27,7 @@ const tabs = [
 const MainLayout = () => {
     const [active, setActive] = useState(0);
     const location = useLocation();
+    const { newLikeCount } = useBadgeStore(); // 获取新喜欢商品数量
     useEffect(() => {
         // console.log(location.pathname);
         // es6的使用power 
@@ -52,6 +54,7 @@ const MainLayout = () => {
                     <Tabbar.Item
                         key={index}
                         icon={tab.icon}
+                        badge={tab.path === '/like' && newLikeCount > 0 ? { content: newLikeCount } : undefined} // 只在喜欢标签且有新喜欢时显示徽章
                     >
                         {tab.title}
                     </Tabbar.Item>
