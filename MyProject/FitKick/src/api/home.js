@@ -7,7 +7,7 @@ export const getImages = (page, tab) => {
     // 首先尝试调用Unsplash API
     return axios.get('https://api.unsplash.com/photos/random', {
         params: {
-            client_id: UNSPLASH_API_KEY,
+            // client_id: UNSPLASH_API_KEY,
             count: 10, // 每次请求10张图片
             page: page || 1,
             orientation: 'portrait', // 优先获取纵向图片

@@ -27,7 +27,7 @@ import {
     Passed
 } from '@react-vant/icons';
 import { useToastStore } from '@/store/useToastStore'
-import { triggerBadgeUpdate } from '@/store/useBadgeStore'; // 导入徽章更新函数
+import eventBus, { EVENT_TYPES } from '@/utils/eventBus';
 
 const BottomBar = memo(({ onAddLike, isLiked }) => {  // 接收isLiked属性
     return (
@@ -108,7 +108,8 @@ const ProductDetail = () => {
                 type: 'success',
             });
             // 触发徽章更新
-            triggerBadgeUpdate();
+            // 使用事件总线触发添加喜欢事件
+            eventBus.emit(EVENT_TYPES.ADD_LIKE);
         }
     }
 

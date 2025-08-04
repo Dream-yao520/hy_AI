@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from '@react-vant/icons';
 import { useState, useRef } from 'react';
 import { useToastStore } from '@/store/useToastStore'; // 导入toast提示
-import { resetBadge } from '@/store/useBadgeStore'; // 导入重置徽章函数
+import eventBus, { EVENT_TYPES } from '@/utils/eventBus';
 import { useEffect } from 'react';
 
 const Like = () => {
@@ -26,13 +26,6 @@ const Like = () => {
     const handleCheckout = () => {
         // 获取选中的商品数量
         const selectedCount = getSelectedCount();
-        if (selectedCount === 0) {
-            showToast({
-                message: '请先选择商品',
-                type: 'warning',
-            });
-            return;
-        }
         // 获取总价
         const totalPrice = getSelectedTotalPrice();
         // 显示结算成功提示
@@ -49,7 +42,7 @@ const Like = () => {
 
     // 商品点击处理函数
     const handleProductClick = (product) => {
-        // 直接使用product.id，不再进行哈希处理
+        // 直接使用product.id
         navigate(`/detail/${product.id}`, {
             state: { clickedImageUrl: product.image }
         });
@@ -81,9 +74,9 @@ const Like = () => {
         products.forEach(p => toggleSelect(p.id));
     };
 
-    // 组件挂载时重置徽章
+    // 组件挂载时使用事件总线重置徽章
     useEffect(() => {
-        resetBadge();
+        eventBus.emit(EVENT_TYPES.RESET_BADGE);
     }, []);
 
     return (
@@ -169,7 +162,7 @@ const Like = () => {
                         className={styles.checkoutButton}
                         onClick={handleCheckout}
                     >
-                        结算选中 ({getSelectedTotalPrice()}元)
+                        结算 ({getSelectedTotalPrice()}元)
                     </button>
                 )}
             </div>

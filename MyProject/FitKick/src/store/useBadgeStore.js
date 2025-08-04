@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import eventBus, { EVENT_TYPES } from '@/utils/eventBus';
 
 // 创建徽章提示状态管理
 export const useBadgeStore = create((set) => ({
@@ -18,14 +19,23 @@ export const useBadgeStore = create((set) => ({
   }
 }));
 
-// 导出一个函数，用于在添加喜欢时触发徽章更新
-export const triggerBadgeUpdate = (count = 1) => {
+// 监听添加喜欢事件
+eventBus.on(EVENT_TYPES.ADD_LIKE, (count = 1) => {
   const store = useBadgeStore.getState();
   store.incrementNewLikes(count);
-};
+});
 
-// 导出一个函数，用于在查看喜欢页面时重置徽章
-export const resetBadge = () => {
+// 监听重置徽章事件
+eventBus.on(EVENT_TYPES.RESET_BADGE, () => {
   const store = useBadgeStore.getState();
   store.resetNewLikes();
+});
+
+// 导出函数，用于在其他地方触发事件
+export const triggerBadgeUpdate = (count = 1) => {
+  eventBus.emit(EVENT_TYPES.ADD_LIKE, count);
+};
+
+export const resetBadge = () => {
+  eventBus.emit(EVENT_TYPES.RESET_BADGE);
 };

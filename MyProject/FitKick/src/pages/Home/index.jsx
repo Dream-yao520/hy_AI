@@ -61,6 +61,7 @@ const Home = () => {
                 <Waterfall
                     fetchMore={fetchMore}
                     loading={loading}
+                    showSellerInfo={false}
                 />
             </div>
         </div>
