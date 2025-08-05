@@ -11,7 +11,6 @@ const Coze = () => {
     const uploadUrl = 'https://api.coze.cn/v1/files/upload';
     const patToken = import.meta.env.VITE_PAT_TOKEN;
     const workflowUrl = 'https://api.coze.cn/v1/workflow/run';
-    // 注意：这里需要替换为你新创建的鞋子生成工作流ID
     const workflow_id = '7534939677193175080';
 
     const uploadImageRef = useRef(null)

@@ -47,7 +47,7 @@
 - 安装的包
     react-router-dom zustand axios
       react-vant(UI组件库) @react-vant/icons lib-flexible(移动端适配)  mockjs
-      react-markdown
+      react-markdown mitt(事件总线)
      开发期间的依赖
      vite-plugin-mock jwt postcss-pxtorem jsonwebtoken
 - vite 配置
@@ -166,6 +166,10 @@
         - on(自定义事件的名字，callback)
         - emit(自定义事件的名字，参数)
         组件通过监听一个自定义事件，实现基于事件的组件通信
+- 使用coze搭建工作流
+    - 完成分析用户上传图片
+    - 根据用户的需求，生成符合需求的图片
+    - 返回图片url和图片的描述给用户
 ## 项目遇到什么问题，怎么解决的
 - chat messages 遇到message 覆盖问题
 - 闭包陷阱问题
@@ -188,3 +192,12 @@
         封装成自定义hooks:useIntersectionObserver
 - jwt 鉴权登录
     - 在请求中带上token，用axios拦截，在Authorization 中带上token
+
+- 图片生成
+    - 图片生成的prompt 设计
+    - 图片生成的api 设计
+    - 图片生成的参数 设计
+    - 图片生成的返回值 设计
+- 该如何拿到图片
+    - 使用coze的api
+    - 图片使用base64格式传递
