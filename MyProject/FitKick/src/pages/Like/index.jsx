@@ -89,8 +89,7 @@ const Like = () => {
                     </div>
                     <div className={styles.filterButtons}>
                         <button className={styles.active}>全部</button>
-                        <button>降价</button>
-                        <button>分组</button>
+                        <button onClick={() => navigate('/coze')}>AI生成想要的鞋子样式</button>
                     </div>
                 </div>
 

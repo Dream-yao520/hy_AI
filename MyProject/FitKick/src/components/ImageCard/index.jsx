@@ -1,6 +1,8 @@
 import styles from './card.module.css'
 import useIntersectionObserver from '@/hooks/useIntersectionObserver'
 import { useNavigate } from 'react-router-dom'; // 导入 useNavigate 钩子
+import { memo, useCallback } from 'react'; // 导入 memo
+
 
 const ImageCard = ({ url, height, id, sellerName, showSellerInfo = true }) => {
     const imgRef = useIntersectionObserver((entry, obs) => {
@@ -16,12 +18,12 @@ const ImageCard = ({ url, height, id, sellerName, showSellerInfo = true }) => {
     const navigate = useNavigate(); // 创建 navigate 函数
 
     // 点击事件处理函数
-    const handleClick = () => {
+    const handleClick = useCallback(() => {
         // 提取商品 ID（假设 id 格式为 "tab-page-productId"）
         // 实际应用中可能需要根据实际数据结构调整
         const productId = id;
         navigate(`/detail/${productId}`, { state: { clickedImageUrl: url } });
-    }
+    }, [id, url, navigate])
 
     return (
         <div style={{ height }} className={styles.card} onClick={handleClick}>
@@ -31,4 +33,4 @@ const ImageCard = ({ url, height, id, sellerName, showSellerInfo = true }) => {
     )
 }
 
-export default ImageCard
+export default memo(ImageCard); // 使用 memo 包装导出

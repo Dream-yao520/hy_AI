@@ -2,7 +2,6 @@ import axios from './config'
 
 // 导入环境变量中的Unsplash API Key
 const UNSPLASH_API_KEY = import.meta.env.VITE_UNSPLASH_API_KEY
-
 export const getImages = (page, tab) => {
     // 首先尝试调用Unsplash API
     return axios.get('https://api.unsplash.com/photos/random', {
@@ -21,7 +20,7 @@ export const getImages = (page, tab) => {
                 data: response.map((item) => ({
                     id: `${tab}-${page}-${item.id}`,
                     height: Math.floor(Math.random() * 300) + 300, // 随机高度300-600
-                    url: item.urls.regular
+                    url: item.urls.regular,
                 }))
             }
         })

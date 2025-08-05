@@ -17,17 +17,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    proxy: {
-      // 配置 Pexels API 代理
-      '/api/pexels': {
-        target: 'https://api.pexels.com/v1',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api\/pexels/, ''),
-        headers: {
-          // 这里不需要添加 Authorization 头，因为我们会在 axios 中处理
-        }
-      }
-    }
-  }
 });

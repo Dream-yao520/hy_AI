@@ -22,6 +22,7 @@ const ProductDetail = lazy(() => import('@/pages/ProductDetail'))
 const Login = lazy(() => import('@/pages/Login'))
 const Chat = lazy(() => import('@/pages/Chat'))
 const RequireAuth = lazy(() => import('@/components/RequireAuth'))
+const Coze = lazy(() => import('@/pages/Coze'))
 
 function App() {
 
@@ -41,6 +42,7 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/detail/:id" element={<RequireAuth><ProductDetail /></RequireAuth>} />//requireAuth
           <Route path="/login" element={<Login />} />
+          <Route path="/coze" element={<Coze />} />
         </Route>
       </Routes>
       <Toast />
