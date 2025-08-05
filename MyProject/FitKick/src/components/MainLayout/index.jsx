@@ -1,6 +1,7 @@
 import {
     useState,
-    useEffect
+    useEffect,
+    memo
 } from 'react';
 import {
     Tabbar,
@@ -64,4 +65,4 @@ const MainLayout = () => {
     )
 }
 
-export default MainLayout;
+export default memo(MainLayout);
