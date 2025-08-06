@@ -55,6 +55,7 @@ const Login = () => {
                         required
                         placeholder="请输入用户名"
                         className={styles.input}
+                        defaultValue="admin"
                     />
                 </div>
                 <div className={styles.formGroup}>
@@ -66,6 +67,7 @@ const Login = () => {
                         required
                         placeholder="请输入密码"
                         className={styles.input}
+                        defaultValue="123456"
                     />
                 </div>
                 <div>
