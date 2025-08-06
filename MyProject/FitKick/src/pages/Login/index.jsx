@@ -3,6 +3,7 @@ import { useLoginStore } from '@/store/useLoginStore';
 import { useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 import { useToastStore } from '@/store/useToastStore'
+import { ArrowLeft } from '@react-vant/icons';
 
 const Login = () => {
     const usernameRef = useRef(null);
@@ -44,6 +45,10 @@ const Login = () => {
 
     return (
         <div className={styles.container}>
+            <div className={styles.back}>
+                <ArrowLeft onClick={() => navigate('/user')} />
+
+            </div>
             <h2 className={styles.title}>FITKICK</h2>
             <form onSubmit={handleSubmit}>
                 <div className={styles.formGroup}>
