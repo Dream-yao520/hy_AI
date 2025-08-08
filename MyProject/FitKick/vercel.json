@@ -20,6 +20,6 @@
             "dest": "index.html"
         }
     ],
-    "installCommand": "pnpm install",
+    "installCommand": "pnpm install --production=false",
     "buildCommand": "pnpm run build"
 }
