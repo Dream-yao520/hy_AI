@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const getRepos = function (id) {
+            return new Promise((resolve, reject) => {
+                try {
+                    const res = fetch(`https://api.github.com/users/${id}/repos`)
+                    res.then(res => res.json()).then(data => {
+                        resolve(data)
+                    }).catch(err => {
+                        reject(err)
+
+                    })
+                } catch (error) {
+                    reject(error)
+                }
+            })
+        }
+        getRepos('Dream-yao520').then(data => {
+            console.log(data)
+        });
+        // 批量异步任务
+        (async () => {
+            // const res = []
+            // res.push(await getRepos('Dream-yao520'))
+            // res.push(await getRepos('shunwuyu'))
+            // console.log(res)
+            const allPromises = [
+                getRepos('Dream-yao520'),
+                getRepos('shunwuyu')
+            ]
+            Promise.all(allPromises).then(data => {
+                console.log(data)
+            })
+
+        })()
+    </script>
+</body>
+
+</html>
