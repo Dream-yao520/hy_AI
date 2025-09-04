@@ -1,0 +1,24 @@
+{
+  "fileName": "XunYou6.0.exe",
+  "fileSize": 72691320,
+  "chunkSize": 5242880,
+  "totalChunks": 14,
+  "uploadedChunks": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "complete": false,
+  "totalChunk": 14
+}
