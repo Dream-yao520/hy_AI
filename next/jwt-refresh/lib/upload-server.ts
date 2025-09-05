@@ -22,7 +22,7 @@ export type Meta = {
     totalChunk: number;
     uploadedChunks: number[];
     complete: boolean;
-    filePath?: string;
+    finalPath?: string;
 }
 
 export function getUploadDir(fileHash: string) {
@@ -95,4 +95,28 @@ export function finalFilePath(fileHash: string, fileName: string) {
 export function fileAlreadyExist(fileHash: string, fileName: string) {
     const p = finalFilePath(fileHash, fileName)
     return existsSync(p) && statSync(p).size > 0
+}
+
+export function mergeChunks(fileHash: string, fileName: string, totalChunks: number) {
+    const {
+        chunkDir
+    } = getUploadDir(fileHash)
+    const target = finalFilePath(fileHash, fileName)
+    const ws = createWriteStream(target)
+    for (let i = 0; i < totalChunks; i++) {
+        const p = join(chunkDir, `${i}.part`)
+        if (!existsSync(p)) {
+            throw new Error(`缺少分片${i}`)
+        }
+        const data = readFileSync(p)
+        ws.write(data)
+    }
+    ws.end()
+    return new Promise((resolve, reject) => {
+        ws.on("finish", () => {
+            resolve(target)
+        })
+        ws.on("error", reject)
+    })
+
 }
