@@ -1,0 +1,16 @@
+{
+  "name": "crawl",
+  "version": "1.0.0",
+  "description": "- 爬取流程\r 1. http 请求得到html\r 2. 正则 后端\r 3. css querySelector \r     内存之中，将html字符串渲染为dom树，x-crawl 支持在内存DOM树中使用querySelector 语法来查找。\r 4. AI 辅助\r     用prompt去描述我们需要的内容，AI可以都代替我们和DOM 树沟通",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.2",
+    "x-crawl": "^10.0.2"
+  }
+}
